@@ -1,0 +1,70 @@
+Redux is independent state management library -> every where is work
+-> react -> react-redux
+
+flux is previous statemangment , data flow
+|
+dane abmove
+|
+introduce redux
+|
+ 
+single source of truth,state should be read only
+
+"you should never modify your state"
+or
+"you should never mutate your state"
+
+changes should be done via function -> Reducer
+workflow should be smooth
+
+
+redux - it is good but it come up with difrent problem
+|
+redux-toolkit -> built in middlewares
+
+
+store -> only one store, single source of truth means global variables
+reducers -> change should be written in function
+useSelector -> to access the data from the store
+useDispatch -> to run the functionalities of the store
+
+1) Store:
+- src / app / store.js
+- import {configureStore} from '@reduxjs/toolkit'
+- Create a store -> export const store = configureStore({})
+
+2) Reducer: All Functionalities
+    - src / features / todo / todoSlice.js
+        - import {createSlice} from '@reduxjs/toolkit'
+        - create initial state
+    - create todoSlice
+        - addd name property
+        - add initialState property
+        - add reducers -> properties and functions
+            - function should be defined not declared in reducers
+            - in reducers we have state and action
+            - state used for to get idea about the current state
+            - action used for to get value
+    - export all methods of reducers
+        - export const { addTodo, removeTodo } = todoSlice.actions;
+        - export reducer
+
+3) Now I can use this reducer in store.js
+    - import todoReducer from '../features/todo/todoSlice'
+    - add reducer in store
+        -> export const store = configureStore({ reducer: todoReducer})
+    
+    - useDispatch ->  to run Functionalities of store
+        - with the use of reducers , useDispatch send the data to the store
+        - useDispatch -> reducers -> store
+
+    - useSelector -> access data from the store
+        - const todos = useSelector(state => state.todos)
+
+
+4) Add Wrapper in main.jsx and pass store in Provider
+    - import {Provider} from 'react-redux'
+    - import {store} from './app/store'
+    - <Provider store={store}>
+        <App />
+      </Provider>
