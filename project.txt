@@ -1,0 +1,11 @@
+Appwrite as backend service
+- it will use for authentication and authorization
+- it will use for storage
+- it will use for database
+
+TinyMCE as text editor
+
+html-react parser
+- it will parse html to value
+
+React form hook
