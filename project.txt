@@ -9,3 +9,96 @@ html-react parser
 - it will parse html to value
 
 React form hook
+
+-whenever html repeate we use key
+- forwordRef
+
+Sure, I'll explain forwardRef in React in a simple way!
+
+Alright, imagine you have a toy box (a component), and you want to give a special toy (a DOM element or another component) to someone else (a parent component). But here's the catch - that someone else doesn't know what toy they're going to get.
+
+In React, you often want to pass a reference to a child component or DOM element up to a parent component. This is where forwardRef comes in.
+
+Let's break it down:
+
+Creating the Toy Box (Child Component):
+
+Imagine this is your toy box (child component):
+
+jsx
+Copy code
+// ToyBox.js
+import React from 'react';
+
+const ToyBox = React.forwardRef((props, ref) => {
+  return (
+    <div ref={ref}>
+      {/* ... */}
+    </div>
+  );
+});
+
+export default ToyBox;
+
+
+React.forwardRef is like a magical box. 
+It takes a function as an argument, and this function receives props and ref. 
+In this function, you use the ref just like you'd use any other prop.
+
+Using the Toy Box (Parent Component):
+
+Now, let's say you're a parent and you want to use this ToyBox component.
+ You can create a reference using React.createRef():
+
+jsx
+Copy code
+// ParentComponent.js
+import React, { useRef } from 'react';
+import ToyBox from './ToyBox';
+
+const ParentComponent = () => {
+  const toyBoxRef = useRef();
+
+  return (
+    <div>
+      <h1>Parent Component</h1>
+      <ToyBox ref={toyBoxRef} />
+    </div>
+  );
+};
+
+export default ParentComponent;
+Here, the toyBoxRef is like a special instruction that says
+, "Hey, ToyBox component, I want to know about your inner workings. Please give me access to your insides."
+
+And because we used forwardRef in the ToyBox component, React knows how to handle this special request.
+
+Using the Toy (Accessing the DOM element):
+
+Now, you can access the DOM element inside the ToyBox from the ParentComponent using the toyBoxRef.current. It's like opening the magical box to see what's inside:
+
+jsx
+Copy code
+// ParentComponent.js
+import React, { useRef, useEffect } from 'react';
+import ToyBox from './ToyBox';
+
+const ParentComponent = () => {
+  const toyBoxRef = useRef();
+
+  useEffect(() => {
+    // Now you can play with the toy (DOM element) inside the ToyBox!
+    console.log(toyBoxRef.current);
+  }, []);
+
+  return (
+    <div>
+      <h1>Parent Component</h1>
+      <ToyBox ref={toyBoxRef} />
+    </div>
+  );
+};
+
+export default ParentComponent;
+This way, you've successfully passed a reference from a child to a parent using forwardRef.
+ It's like sharing a secret toy between components!
