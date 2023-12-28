@@ -102,3 +102,8 @@ const ParentComponent = () => {
 export default ParentComponent;
 This way, you've successfully passed a reference from a child to a parent using forwardRef.
  It's like sharing a secret toy between components!
+
+
+- I need to add key and value in option when I use map function
+
+- navigate directly to the page where as in Link we have to click on the link to navigate to the page
